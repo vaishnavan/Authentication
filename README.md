@@ -7,4 +7,4 @@
 6.password reset
 
 
-To access Register and login feature create .env file with MONGODB URI and our JWT_key
+To access Register and login feature create .env file with MONGODB URI and your JWT_key
