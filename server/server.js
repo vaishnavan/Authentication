@@ -2,11 +2,18 @@ const express = require("express");
 const mongoose = require("mongoose");
 const port = process.env.PORT || 5000;
 const app = express();
+//auth middleware
+// const auth = require("./middleware/auth");
 //env config
 require("dotenv").config();
 
 //middleware
 app.use(express.json());
+
+//Api Title creation
+app.get("/", (req, res) => {
+    res.json({message:"Authentication API creation done!!!"});
+})
 
 //router linking
 app.use("/auth", require("./routes/user.route"));
