@@ -1,5 +1,6 @@
 const User = require("../model/user.model");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const userController = {
     register: async (req, res) => {
@@ -9,7 +10,7 @@ const userController = {
             if(!username || !email || !password || !confirmpassword){
                 return res.status(400).json({message:"All the fields are required"});
             }
-            
+
             const user = await User.findOne({email});
             if(user) return res.status(400).json({message:"User all already exists"});
 
@@ -31,6 +32,41 @@ const userController = {
             })
             await userData.save()
             res.status(200).json(userData);
+            
+        } catch (error) {
+            return res.status(404).json({message:error.message});
+        }
+    },
+    login: async (req, res) => {
+        try {
+            const { email, password } = req.body;
+
+            if(!email || !password){
+                return res.status(400).json({message:"All the fields are required"});
+            }
+
+            //email exists or not checking
+            const user = await User.findOne({email});
+            if(!email) return res.status(400).json({message:"email doesn't exists"});
+
+            //password match checking
+            const doMatch = await bcrypt.compare(password, user.password);
+            if(!doMatch) return res.status(400).json({message:"password Incorrect"});
+
+            //preparing the login response
+            if(doMatch){
+                //jwt token creation
+                const token = jwt.sign({_id:user._id}, process.env.JWT_SUSPENSE , {expiresIn:'1d'});
+                const {_id, username, email} = user
+                res.status(200).json({
+                    mytoken: token,
+                    user:{
+                        _id,
+                        username,
+                        email
+                    }
+                })
+            }
             
         } catch (error) {
             return res.status(404).json({message:error.message});
