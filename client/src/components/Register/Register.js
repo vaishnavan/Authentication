@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { postRegisterData } from '../../services/user.service';
 import './register.scss';
 
 const initialstate={
@@ -27,6 +28,10 @@ function Register() {
             email:'',
             password:'',
             confirmpassword:'',
+        })
+        postRegisterData(userData)
+        .then((res) => {
+            console.log(res.data);
         })
     }
 
