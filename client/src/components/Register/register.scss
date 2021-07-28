@@ -1,0 +1,51 @@
+@mixin  regsbtn {
+    color: white;
+    background-color: blue;
+    border: none;
+    border-radius: 2px;
+}
+
+.register-header{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgb(187, 186, 186);
+    width: 500px;
+    height: 400px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+.register-main-path{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.input-forms input{
+    width: 250px;
+    padding: 0.5rem;
+    outline: none;
+}
+.input-forms{
+    padding: 0.5rem;
+}
+
+.register-header form button{
+    @include regsbtn();
+    margin: 1.2rem;
+    width: 250px;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+
+
+@media (max-width:600px) {
+    .register-header{
+        width: 320px;
+        height: 380px;
+    }
+}
+

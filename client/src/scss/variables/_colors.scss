@@ -1,0 +1,27 @@
+$black: #000000;
+$white: #FFFFFF;
+$red: #FF0000;
+$green: #008000;
+$transparent: #00000000;
+
+
+$rich_black: #141212;
+$darker_grey: #494945;
+$dark_grey: #808282;
+$mid_grey: #A9A9A9;
+$light_grey: #D9D9D9;
+$lighter_grey: #E5E5E5;
+$lightest_grey: #F4F4F4;
+$almost_white: #FAFAFA;
+$periwinkle: #F4F5FC;
+$berry: #760048;
+$peach: #FFDEDE;
+$nude: #F4DFD9;
+$blue_grey: #3F616F;
+$light_blue_grey: #E4ECED;
+
+$color_text_main: $rich_black;
+$color_text_main_hover: lighten($color_text_main, 30%);
+$color_text_secondary: $darker_grey;
+$color_text_secondary_hover: darken($color_text_secondary, 20%);
+$color_text_light: $mid_grey;
