@@ -19,6 +19,7 @@ app.get("/", (req, res) => {
 
 //router linking
 app.use("/auth", require("./routes/user.route"));
+app.use("/blog", require("./routes/blog.route"));
 
 //server connection
 app.listen((port), (req, res) => {
