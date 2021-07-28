@@ -1,0 +1,22 @@
+.navbar-main{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    background-color: gray;
+
+    .navbar-logo h3{
+        color: white;
+    }
+
+    .navbar-logout button{
+        padding: 7px 20px;
+        cursor: pointer;
+    }
+}
+
+@media (max-width:600px) {
+    .navbar-main{
+        padding: 5px 20px;
+    }
+}

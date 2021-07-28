@@ -1,9 +1,18 @@
 import React from 'react'
+import Navbar from '../Navbar/Navbar';
+import './home.scss';
 
 function Home() {
+
+    const myLoginUserData = JSON.parse(localStorage.getItem("auth"));
+    console.log(myLoginUserData.user.username);
+
     return (
         <div>
-            <h1>home component</h1>
+            <Navbar />
+            <div className="home-welcomeGreet">
+                <h3>welcome, {myLoginUserData.user.username}</h3>
+            </div>
         </div>
     )
 }
