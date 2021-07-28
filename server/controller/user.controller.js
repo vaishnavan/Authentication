@@ -57,6 +57,11 @@ const userController = {
             if(doMatch){
                 //jwt token creation
                 const token = jwt.sign({_id:user._id}, process.env.JWT_SUSPENSE , {expiresIn:'1d'});
+                const options = {
+                    expires:new Date(Date.now() + 900000),
+                    httpOnly: true
+                }
+                res.cookie('jwt-token', token, options);
                 const {_id, username, email} = user
                 res.status(200).json({
                     mytoken: token,
