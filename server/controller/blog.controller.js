@@ -46,6 +46,15 @@ const blogController = {
         } catch (error) {
             return res.status(404).json({message:error.message});
         }
+    },
+    //Deleting Singal post
+    deleteBlog: async (req, res) => {
+        try {
+            const deleteData = await Blog.deleteOne({_id:req.params.id});
+            return res.status(200).json({message:"deleted successfully"});
+        } catch (error) {
+            return res.status(404).json({message:error.message});
+        }
     }
 }
 
