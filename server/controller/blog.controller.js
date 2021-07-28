@@ -26,7 +26,7 @@ const blogController = {
     //Retrive a blog post
     getblog: async (req, res) => {
         try {
-           const getBlogData = await Blog.find();
+           const getBlogData = await Blog.find().populate("postedBy","_id username email")
            res.status(200).json({getBlogData}); 
         } catch (error) {
             return res.status(404).json({message:error.message});

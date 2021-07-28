@@ -1,0 +1,57 @@
+.postmodel-main{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 400px;
+    border: 1px solid rgb(207, 205, 205);
+    background-color: rgb(202, 202, 202);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    padding: 10px;
+}
+
+.modal {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+  
+
+.postmodel-main span{
+    font-size: 2rem;
+    float: right;
+    color: white;
+    cursor: pointer;
+}
+.postmodel-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.postmodel-form .post-input input{
+    width: 250px;
+    padding: 10px;
+    outline: none;
+}
+
+.postmodel-form .post-input{
+    margin: 10px 0;
+}
+
+.post-btn{
+    text-align: center;
+}
+
+.post-btn button{
+    width: 80px;
+    padding: 6px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+}
+
+.post-btn button:hover{
+    background-color: rgb(214, 214, 214);
+}

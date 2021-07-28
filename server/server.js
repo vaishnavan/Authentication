@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require('cookie-parser')
 const port = process.env.PORT || 5000;
 const app = express();
 //auth middleware
@@ -10,6 +11,7 @@ require("dotenv").config();
 
 //middleware
 app.use(cors());
+app.use(cookieParser())
 app.use(express.json());
 
 //Api Title creation
