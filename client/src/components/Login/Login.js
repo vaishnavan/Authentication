@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { postLoginData } from '../../services/user.service';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import '../Register/register.scss';
 
@@ -12,6 +12,7 @@ const initialstate={
 function Login() {
     const [userData, setUserData] = useState(initialstate);
 
+    let history = useHistory();
     const handleChange = (e) => {
         const {name, value} = e.target;
         setUserData({
@@ -26,11 +27,13 @@ function Login() {
         postLoginData(userData)
         .then((res) => {
             // console.log(res.data);
+            localStorage.setItem("auth", JSON.stringify(res.data));
             toast.success("Login successfully")
             setUserData({
                 email:'',
                 password:'',
             })
+            history.push("/home");
         })
         .catch((err) => {
             toast.error(err.response.data.message);
