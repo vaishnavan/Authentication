@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { postLoginData } from '../../services/user.service';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import '../Register/register.scss';
 
 const initialstate={
@@ -22,13 +23,17 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(userData);
-        setUserData({
-            email:'',
-            password:'',
-        })
         postLoginData(userData)
         .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
+            toast.success("Login successfully")
+            setUserData({
+                email:'',
+                password:'',
+            })
+        })
+        .catch((err) => {
+            toast.error(err.response.data.message);
         })
     }
 

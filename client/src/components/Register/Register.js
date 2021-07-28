@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { postRegisterData } from '../../services/user.service';
-import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { Link, useHistory } from 'react-router-dom';
 import './register.scss';
 
 const initialstate={
@@ -13,6 +14,7 @@ const initialstate={
 function Register() {
     const [userData, setUserData] = useState(initialstate);
 
+    let history = useHistory ();
     const handleChange = (e) => {
         const {name, value} = e.target;
         setUserData({
@@ -24,16 +26,22 @@ function Register() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(userData);
-        setUserData({
-            username:'',
-            email:'',
-            password:'',
-            confirmpassword:'',
-        })
         postRegisterData(userData)
         .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
+            history.push("/login")
+            toast.success("saved successfully")
+            setUserData({
+                username:'',
+                email:'',
+                password:'',
+                confirmpassword:'',
+            })
         })
+        .catch(err => {
+            toast.error(err.response.data.message);
+        })
+        
     }
 
 
