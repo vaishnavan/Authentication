@@ -6,6 +6,11 @@ const postRegisterData = (myData) => {
     return axios.post(API_URL+"register", myData);
 }
 
+const postLoginData = (myData) => {
+    return axios.post(API_URL+"login", myData);
+}
+
 export  {
-    postRegisterData
+    postRegisterData,
+    postLoginData
 }

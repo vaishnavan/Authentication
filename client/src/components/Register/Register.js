@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { postRegisterData } from '../../services/user.service';
+import { Link } from 'react-router-dom';
 import './register.scss';
 
 const initialstate={
@@ -59,7 +60,7 @@ function Register() {
                             <input type="password" value={userData.confirmpassword} placeholder="Confirm Password" name="confirmpassword" onChange={handleChange} />
                         </div>
                         <button onClick={handleSubmit} type="submit">SignUp</button>
-                        <span>Already signup? Login</span>
+                        <span>Already signup? <Link to="/login">Login</Link></span>
                     </form>
                 </div>
             </div>
