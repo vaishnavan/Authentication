@@ -1,14 +1,35 @@
-import React, { useState } from 'react';
-import {postBlogData} from '../../services/blog.service';
+import React, { useEffect, useState } from 'react';
+import {postBlogData, updateBlogPost} from '../../services/blog.service';
 import './addpost.scss';
 
 const initialstate={
+    _id:'',
     title:'',
     body:'',
 }
 
-function AddPost({handleClose}) {
+function AddPost({handleClose, handleget, handleEditData, handleEdit, handlepopup}) {
     const [postData, setPostData] = useState(initialstate);
+    console.log(handleEditData);
+
+
+    handlepopup = () => {
+        setPostData({
+            title:'',
+            body:'',
+        })
+    }
+    
+
+    handleEdit = () => {
+        if(handleEditData._id != null){
+            setPostData({
+                title: handleEditData.title,
+                body: handleEditData.body
+            })
+        }
+    }
+
 
     // let history = useHistory();
     const handleChange = (e) => {
@@ -20,13 +41,38 @@ function AddPost({handleClose}) {
         })
     }
 
+    // handlepop = () => {
+    //     setPostData({
+    //         title:'',
+    //         body:''
+    //     })
+    // }
+
     const handlePost = (e) => {
         e.preventDefault();
-        postBlogData(postData)
-        .then((res) => {
-            console.log(res.data);
-        })
+        if(handleEditData._id){
+            updateBlogPost(handleEditData._id, postData)
+            .then((res) => {
+                setPostData({
+                    _id:'',
+                    title:'',
+                    body:''
+                })
+                handleget();    
+            })
+        }else{
+            postBlogData(postData)
+            .then((res) => {
+                setPostData({
+                    title:'',
+                    body:''
+                })
+                handleget();    
+            })
+        }
     }
+
+    
 
 
     return (
@@ -36,10 +82,10 @@ function AddPost({handleClose}) {
                 <div className="postmodel-form">
                     <form>
                         <div className="post-input">
-                            <input type="text" name="title" placeholder="Enter post title" onChange={handleChange} />
+                            <input type="text" value={postData.title} name="title" placeholder="Enter post title" onChange={handleChange} />
                         </div>
                         <div className="post-input">
-                            <input type="text" name="body" placeholder="Description" onChange={handleChange} />
+                            <input type="text" value={postData.body} name="body" placeholder="Description" onChange={handleChange} />
                         </div>
                         <div className="post-btn">
                             <button onClick={handlePost}>Post</button>

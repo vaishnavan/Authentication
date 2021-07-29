@@ -24,6 +24,17 @@ const getBlogData = () => {
     });
 }
 
+const updateBlogPost = (id) => {
+    return axios.post(API_URL+`updatepost/${id}`,
+        {
+            method:"POST",
+            headers:{
+                authorization: tokenparse.mytoken
+            }
+        }
+    )
+}
+
 const deleteBlogPost = (id) => {
     return axios.delete(API_URL+`deletepost/${id}`,
         {
@@ -38,5 +49,6 @@ const deleteBlogPost = (id) => {
 export {
     postBlogData,
     getBlogData,
-    deleteBlogPost
+    deleteBlogPost,
+    updateBlogPost
 }
