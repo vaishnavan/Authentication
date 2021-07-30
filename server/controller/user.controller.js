@@ -1,6 +1,18 @@
 const User = require("../model/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
+
+
+const transport = nodemailer.createTransport({
+  host: "in-v3.mailjet.com",
+  port: 587,
+  auth: {
+    user: process.env.MAIL_USERNAME,
+    pass: process.env.MAIL_PASSWORD,
+  },
+});
+
 
 const userController = {
     register: async (req, res) => {
@@ -31,6 +43,7 @@ const userController = {
                 confirmpassword:hashpass,
             })
             await userData.save()
+            
             res.status(200).json(userData);
             
         } catch (error) {
@@ -62,6 +75,15 @@ const userController = {
                     httpOnly: false
                 }
                 res.cookie('jwt-token', token, options);
+                transport.sendMail({
+                    to: user.email,
+                    from: process.env.EMAIL,
+                    subject: `Signup Successful`,
+                    html: `
+                    <h1>Welcome, ${user.username} To Dark Services</h1>
+                    <h5>Successfully  signup </h5>
+                    `,
+                });
                 const {_id, username, email} = user
                 res.status(200).json({
                     mytoken: token,
