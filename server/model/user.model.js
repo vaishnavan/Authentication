@@ -17,7 +17,13 @@ const userSchema = new mongoose.Schema({
     confirmpassword:{
         type:String,
         required:true,
-    }
+    },
+    confirm: {
+        type: Boolean,
+        default: false,
+    },
+    resetToken: String,
+    expireTime: Date,
 },
     {timestamps: true}
 )
